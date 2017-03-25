@@ -1,0 +1,28 @@
+{
+  "name": "buche",
+  "version": "0.1.0",
+  "description": "Services monitor",
+  "main": "buche_ws.js",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-handlebars": "^1.0.0",
+    "koa-mongo": "^0.7.0",
+    "koa-router": "^5.4.0",
+    "mongodb": "^2.2.25"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcasco/buche.git"
+  },
+  "author": "fcasco@gmail.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/fcasco/buche/issues"
+  },
+  "homepage": "https://github.com/fcasco/buche#readme"
+}

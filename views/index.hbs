@@ -1,1 +1,32 @@
-{{ message }}
+<section class="add_monitor">
+  <h2>Agregar monitor</h2>
+  <form action="/monitors/add" method="post">
+    <label for="name">Name</label>
+    <input name="name" type="text">
+
+    <label for="target_url">URL</label>
+    <input name="target_url" type="url">
+
+    <label for="email">Email</label>
+    <input name="email" type="email">
+
+    <button type="submit">Add</button>
+  </form>
+</section>
+<section class="monitors">
+  <h2>Monitores</h2>
+  <ul>
+    {{#each monitors }}
+      <li>
+        <dl>
+          <dt>Name</dt><dd>{{ this.attributes.name }}</dd>
+          <dt>URL</dt><dd>{{ this.attributes.target_url }}</dd>
+          <dt>Email</dt><dd>{{ this.attributes.email }}</dd>
+        </dl>
+      </li>
+    {{/each}}
+  </ul>
+</section>
+<section class="messages">
+  <p class="message">{{ message }}</p>
+</section>
