@@ -4,7 +4,7 @@ let config = {};
 
 config.db_settings = {
 	'user': 'tester',
-	'pass': 'tester',
+	'pass': 'testthis',
     'host': 'ds145800.mlab.com',
     'port': 45800,
     'db': 'buche'
