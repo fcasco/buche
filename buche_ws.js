@@ -2,13 +2,14 @@
 */
 'use strict';
 
-const DB_PARAMS = {
-    'host': '127.0.0.1',
-    'port': 27017,
-    'db': 'buche'
-}
+const config = require('./buche_config.js');
+
 const Mongorito = require('mongorito');
-Mongorito.connect(DB_PARAMS['host'] + '/' + DB_PARAMS['db']);
+Mongorito.connect(config.db_settings['user']
+                  + ':' + config.db_settings['pass']
+                  + '@' + config.db_settings['host']
+                  + ':' + config.db_settings['port']
+                  + '/' + config.db_settings['db']);
 const MongoritoModel = Mongorito.Model;
 class BucheMonitor extends MongoritoModel {
 }
