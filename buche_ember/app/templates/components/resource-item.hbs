@@ -1,0 +1,9 @@
+<article class="resource status_{{resource.last_status}}">
+    <h3>{{resource.name}}</h3>
+    <dl>
+        <dt>Host</dt><dd>{{resource.host}}</dd>
+        <dt>Port</dt><dd>{{resource.port}}</dd>
+        <dt>Status</dt><dd class="status">{{resource-status-type resource.last_status}}</dd>
+        <dt>Last check</dt><dd>{{resource.last_check}}</dd>
+    </dl>
+</article>
