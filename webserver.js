@@ -6,6 +6,7 @@ const db = require('./models.js');
 let BucheWebserver = Express();
 
 BucheWebserver.use(function (request, response, next) {
+    console.log(request);
     response.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -23,3 +24,4 @@ BucheWebserver.get('/api/resources', function (request, response) {
 });
 
 BucheWebserver.listen('42024');
+console.log('listening on http://localhost:42024');
