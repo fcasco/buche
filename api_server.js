@@ -13,13 +13,18 @@ BucheWebserver.use(function (request, response, next) {
 });
 
 BucheWebserver.get('/api/resources', function (request, response) {
+    console.log(request.route.path + '...');
+
     db.ResourceModel.find({}, function (error, resources) {
         if (error) {
             response.send(error);
+            console.log('error');
         } else {
             response.send(resources);
+            console.log('ok');
         }
     });
 });
 
 BucheWebserver.listen('42024');
+console.log('Listening on http://localhost:42024 ...');
