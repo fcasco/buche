@@ -14,6 +14,8 @@ BucheWebserver.use(function (request, response, next) {
 });
 
 BucheWebserver.get('/api/resources', function (request, response) {
+    let response_data = {};
+
     console.log(request.route.path + '...');
 
     db.ResourceModel.find({}, function (error, resources) {
@@ -21,7 +23,8 @@ BucheWebserver.get('/api/resources', function (request, response) {
             response.send(error);
             console.log('error');
         } else {
-            response.send(resources);
+            response_data['resources'] = resources;
+            response.send(response_data);
             console.log('ok');
         }
     });
