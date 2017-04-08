@@ -29,7 +29,7 @@ module.exports = function(environment) {
           'report-uri':"'localhost'",
           'style-src': "'self' 'unsafe-inline'",
           'frame-src': "'none'"
-      }
+        }
     }
   };
 
