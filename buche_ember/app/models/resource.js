@@ -1,14 +1,15 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-        id: DS.attr(),
+        _id: DS.attr(),
         name: DS.attr(),
         host: DS.attr(),
         port: DS.attr(),
         shouldSend: DS.attr(),
         souldReceive: DS.attr(),
+        email: DS.attr(),
         interval: DS.attr(),
-        last_status: DS.attr(),
-        last_check: DS.attr(),
-        report_to: DS.attr()
+        lastStatus: DS.attr(),
+        lastResponseTime: DS.attr(),
+        lastCheck: DS.attr()
 });
