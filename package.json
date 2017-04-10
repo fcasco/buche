@@ -11,6 +11,8 @@
     "koa-mongo": "^0.7.0",
     "koa-router": "^5.4.0",
     "mongodb": "^2.2.25"
+    "express": "^4.15.2",
+    "mongoose": "^4.9.3"
   },
   "devDependencies": {},
   "scripts": {
