@@ -4,7 +4,6 @@
 "use strict";
 
 const Dgram = require('dgram');
-const sleep = require('sleep');
 const Mongodb = require('mongodb');
 //const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
@@ -70,22 +69,29 @@ Sentinel.updateCheck = function updateCheck(resource, data) {
     Sentinel.getDb(function (db) {
         let checksCollection = db.collection('checks');
 
-        let checkCursor = checksCollection.find({"resourceId": Mongodb.ObjectId(resource._id)})
-                                          .sort({"datetime": -1})
+        let checkCursor = checksCollection.find({"resourceId": Mongodb.ObjectId(resource._id),
+                                                 "received": null})
+                                          .sort({"datetime": 1})
                                           .limit(1);
 
         checkCursor.toArray(function (err, results) {
             let resourcesCollection = db.collection('resources');
+            let checksCollection = db.collection('checks');
             let lastCheck = results[0];
             let responseTime = data.datetime - lastCheck.datetime;
-
-            console.log(responseTime);
 
             resourcesCollection.update({"_id": resource._id},
                                        {"$set": {
                                            "lastStatus": data.status,
                                            "lastResponseTime": responseTime
                                        }});
+
+            checksCollection.update({"_id": lastCheck._id},
+                                    {"$set": {
+                                        "status": data.status,
+                                        "responseTime": responseTime,
+                                        "received": data.received
+                                    }});
             }
         );
 
@@ -103,8 +109,7 @@ Sentinel.checkResource = function checkResource(resource) {
         const expectedMessage = Buffer.from(resource.expect);
         let data = {};
         data["datetime"] = new Date;
-
-        console.log(`Response: ${msg}`);
+        data["received"] = msg;
 
         if (msg.equals(expectedMessage)) {
             console.log(`${resource.port}: ok`);
