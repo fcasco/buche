@@ -60,3 +60,14 @@ Ejemplo::
             "updatedAt": "2017-04-01T15:21:19.009Z"
         }
     ]
+
+
+Los status posibles son::
+
+
+    {
+        "n": "new",
+        "w": "waiting",
+        "o": "ok",
+        "f": "fail"
+    }

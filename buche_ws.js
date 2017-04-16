@@ -3,16 +3,7 @@
 'use strict';
 
 const config = require('./buche_config.js');
-
-const Mongorito = require('mongorito');
-Mongorito.connect(config.db_settings['user']
-                  + ':' + config.db_settings['pass']
-                  + '@' + config.db_settings['host']
-                  + ':' + config.db_settings['port']
-                  + '/' + config.db_settings['db']);
-const MongoritoModel = Mongorito.Model;
-class BucheMonitor extends MongoritoModel {
-}
+const models = require('./buche_models.js');
 
 const Koa = require('koa');
 const KoaHandlebars = require('koa-handlebars');
@@ -29,31 +20,42 @@ buche_ws.use(KoaHandlebars({
 }));
 
 buche_router.get('/', function *(ctx, next) {
-    const monitors = yield BucheMonitor.all();
+    let resources = models.Resource.all();
 
     yield this.render('index', {
         'title': 'Buche',
         'message': '_(o.o)_d',
-        'monitors': monitors
+        'resources': resources
     });
 });
 
-buche_router.post('/monitors/add', function *(next) {
-    const monitor_name = this.request.body.name;
-    const monitor_target_url = this.request.body.target_url;
-    const monitor_email = this.request.body.email;
-    const new_monitor = new BucheMonitor({
-        'name': monitor_name,
-        'target_url': monitor_target_url,
-        'email': monitor_email
+const RESOURCE_STATUS_NEW = 'n';
+const RESOURCE_STATUS_OK = 'o';
+const RESOURCE_STATUS_ERROR = 'e';
+
+buche_router.post('/resources/add', function *(next) {
+    const resource_name = this.request.body.name;
+    const resource_host = this.request.body.host;
+    const resource_port = this.request.body.port;
+    const resource_email = this.request.body.email;
+    const new_resource = new models.Resource({
+        'name': resource_name,
+        'host': resource_host,
+        'port': resource_host,
+        'email': resource_email,
+        'last_status': RESOURCE_STATUS_NEW
     })
 
-    new_monitor.save();
+    new_resource.save();
 
+    this.response.redirect('/');
+
+    /*
     yield this.render('index', {
         'title': 'Buche',
-        'message': `monitoring ${monitor_target_url}`
+        'message': `monitoring ${resource_host}:${resource_port}`
     });
+    */
 });
 
 buche_ws
