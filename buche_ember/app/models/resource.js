@@ -1,6 +1,7 @@
 import DS from 'ember-data';
+import AutoReload from 'ember-data-autoreload';
 
-export default DS.Model.extend({
+let Resource = DS.Model.extend(AutoReload, {
         _id: DS.attr(),
         name: DS.attr(),
         host: DS.attr(),
@@ -11,5 +12,7 @@ export default DS.Model.extend({
         interval: DS.attr(),
         lastStatus: DS.attr(),
         lastResponseTime: DS.attr(),
-        lastCheck: DS.attr()
+        lastCheck: DS.attr('date')
 });
+
+export default Resource;

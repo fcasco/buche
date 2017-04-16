@@ -19,6 +19,10 @@ Sentinel.dbUrl = 'mongodb://' + config.db_settings['user']
                + ':' + config.db_settings['port']
                + '/' + config.db_settings['name'];
 
+if (config.db_settings['params']) {
+    Sentinel.dbUrl += '?' + config.db_settings['params'];
+}
+
 
 // Conectar con la base de datos
 Sentinel.getDb = function getDb(callback) {
@@ -26,7 +30,12 @@ Sentinel.getDb = function getDb(callback) {
     if (Sentinel.db) {
         callback(Sentinel.db);
     } else {
+        console.log('Connecting to ' + Sentinel.dbUrl + ' ...');
         Mongodb.MongoClient.connect(Sentinel.dbUrl, function (error, db) {
+
+            if (error) {
+                throw error;
+            }
             assert.equal(error, null);
 
             console.log(`Connected to ${Sentinel.dbUrl}`);
@@ -169,7 +178,7 @@ Sentinel.getResources = function getResources(callback) {
 // Iniciar la verificacion de recursos
 Sentinel.run = function run() {
 
-    console.log('Checking resources...');
+    console.log('Running sentinel...');
 
     Sentinel.getDb(function (db) {
         Sentinel.getResources(function (resources) {

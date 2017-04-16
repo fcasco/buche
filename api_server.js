@@ -1,9 +1,10 @@
 /*jslint es6*/
 const Express = require('express');
-const db = require('./models.js');
+const models = require('./models.js');
 
 
 let BucheWebserver = Express();
+
 
 BucheWebserver.use(function (request, response, next) {
     console.log(request);
@@ -13,12 +14,13 @@ BucheWebserver.use(function (request, response, next) {
     next();
 });
 
+
 BucheWebserver.get('/api/resources', function (request, response) {
     let response_data = {};
 
-    console.log(request.route.path + '...');
+    console.log(request.route.path + ' ...');
 
-    db.ResourceModel.find({}, function (error, resources) {
+    models.Resource.find({}, function (error, resources) {
         if (error) {
             response.send(error);
             console.log('error');
