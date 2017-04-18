@@ -1,14 +1,16 @@
 <article class="resource status_{{resource.lastStatus}}">
-    <h3>{{resource.name}} <small>{{resource.id}}</small></h3>
-    <dl>
-        <dt>Host</dt><dd>{{resource.host}}</dd>
-        <dt>Port</dt><dd>{{resource.port}}</dd>
-    </dl>
+    <div class="card-content">
+        <h3>{{resource.name}} <small>{{resource.id}}</small><i class="material-icons"></i></h3>
+        <dl>
+            <dt>Host</dt><dd>{{resource.host}}</dd>
+            <dt>Port</dt><dd>{{resource.port}}</dd>
+        </dl>
 
-    <h4>Status</h4>
-    <dl>
-        <dt>Status</dt><dd>{{resource-status-type resource.lastStatus}}</dd>
-        <dt>Response time</dt><dd>{{resource.lastResponseTime}}</dd>
-        <dt>Last check</dt><dd>{{resource.lastCheck}}</dd>
-    </dl>
+        <h4>Status</h4>
+        <dl>
+            <dt>Status</dt><dd>{{resource-status-type resource.lastStatus}}</dd>
+            <dt>Response time</dt><dd>{{resource.lastResponseTime}}</dd>
+            <dt>Last check</dt><dd>{{resource.lastCheck}}</dd>
+        </dl>
+    </div>
 </article>

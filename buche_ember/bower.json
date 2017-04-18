@@ -1,5 +1,6 @@
 {
   "name": "ember-quickstart",
   "dependencies": {
+    "materialize": "0.97.6"
   }
 }

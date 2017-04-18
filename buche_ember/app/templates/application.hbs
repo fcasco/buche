@@ -1,9 +1,19 @@
-<h1>Buche</h1>
+<nav>
+    <div class="nav-wrapper">
+        <h1>{{#link-to 'index'}}Buche{{/link-to}}</h1>
 
-<header>
-{{#link-to 'index'}}Home{{/link-to}}
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>{{#link-to 'about'}}About{{/link-to}}</li>
+        </ul>
+    </div>
+</nav>
 
+<main>
+    <div class="container">
+        {{ outlet }}
+    </div>
+</main>
+
+<footer>
 {{#link-to 'about'}}About{{/link-to}}
-</header>
-
-{{ outlet }}
+</footer>
